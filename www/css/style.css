@@ -1,0 +1,14 @@
+/* Empty. Add your own CSS if you like */
+.subheading{
+  text-align: center;
+  background-color: pink;
+}
+
+.container{
+  width: 1200px;
+  background-color: black;
+}
+
+img{
+  border: 5px solid white;
+}
