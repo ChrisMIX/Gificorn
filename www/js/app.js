@@ -25,25 +25,25 @@ app.controller("gifCtrl", function($scope, $http){
     };
   });
 
-   $(".container").on("submit", ".searchForm", function(e){
-        e.preventDefault();
-        var data = $(this).serialize();
-        console.log(data);
+   // $(".container").on("submit", ".searchForm", function(e){
+   //      e.preventDefault();
+   //      var data = $(this).serialize();
+   //      console.log(data);
 
-        var api = "http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&";
-        var query = data;
-        var url = api + query;
-        $scope.searchGifs = [];
+   //      var api = "http://api.giphy.com/v1/gifs/search?&api_key=dc6zaTOxFJmzC&";
+   //      var query = data;
+   //      var url = api + query;
+   //      $scope.searchGifs = [];
 
-        var results = $http.get(url).success(function(data){
-          for(var i = 0; i < 24; i++){
-            $scope.searchGifs.push(data.data[i].images.original.url);
-          }
-        });
-        console.log(url);
-        console.log($scope.searchGifs);
-        $(".container").append(results);
-      })
+   //      var results = $http.get(url).success(function(data){
+   //        for(var i = 0; i < 24; i++){
+   //          $scope.searchGifs.push(data.data[i].images.original.url);
+   //        }
+   //      });
+   //      console.log(url);
+   //      console.log($scope.searchGifs);
+   //      $(".container").append(results);
+   //    })
 })
 
 app.run(function($ionicPlatform) {
@@ -57,4 +57,57 @@ app.run(function($ionicPlatform) {
     }
   });
 })
+
+.config(function($stateProvider, $urlRouterProvider) {
+
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
+
+  // setup an abstract state for the tabs directive
+    .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
+
+  // Each tab has its own nav history stack:
+
+  .state('tab.search', {
+    url: '/search',
+    views: {
+      'tab-search': {
+        templateUrl: 'templates/tab-search.html',
+        controller: 'SearchCtrl'
+      }
+    }
+  })
+
+  .state('tab.trending', {
+      url: '/trending',
+      views: {
+        'tab-trending': {
+          templateUrl: 'templates/tab-trending.html',
+          controller: 'TrendingCtrl'
+        }
+      }
+    })
+
+  .state('tab.favorites', {
+    url: '/favorites',
+    views: {
+      'tab-favorites': {
+        templateUrl: 'templates/tab-favorites.html',
+        controller: 'FavoriteCtrl'
+      }
+    }
+  });
+
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/tab/search');
+
+});
+
 
