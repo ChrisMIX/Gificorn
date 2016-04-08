@@ -4,4 +4,4 @@ This is a project done using ionic and angular.js. The goal was to utilize the G
 
 Version 1: Achieved basic functionality with search and trending gifs.
 
-Additions for Next Version: Enlarge images upon clicking them, and separate information into tabs.
+Additions for Next Version: Enlarge images upon clicking them, and separate information into tabs. Formatting needs refactoring.
